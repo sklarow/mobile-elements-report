@@ -1,6 +1,6 @@
 # mobile-elements-report
 
-Mobile Elements Report is a lightweight web tool for analyzing Appium Source Page XML. It helps you visualize the UI hierarchy and spot problems before writing automated tests.
+Mobile Elements Report is a lightweight web tool for analyzing Appium Source Page XML. It helps you visualize the UI hierarchy, inspect locator details like XPath, and spot problems before writing automated tests.
 
 ## How it works
 
