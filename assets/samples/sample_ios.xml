@@ -1,0 +1,5 @@
+<AppiumAUT>
+  <XCUIElementTypeButton type="XCUIElementTypeButton" name="OK" label="OK" enabled="true" visible="true" x="0" y="0" width="100" height="30" />
+  <XCUIElementTypeButton type="XCUIElementTypeButton" name="" label="Cancel" enabled="true" visible="true" x="0" y="40" width="44" height="44" />
+  <XCUIElementTypeStaticText type="XCUIElementTypeStaticText" name="text1" label="Text" enabled="true" visible="true" x="0" y="90" width="100" height="20" />
+</AppiumAUT>
