@@ -8,6 +8,11 @@ export function parse(xml) {
     const el = node;
     const id = el.getAttribute('resource-id') || el.getAttribute('name') || '';
     const accId = el.getAttribute('content-desc') || el.getAttribute('label') || el.getAttribute('accessibility-id') || '';
+    const text =
+      el.getAttribute('text') ||
+      el.getAttribute('label') ||
+      el.getAttribute('value') ||
+      (el.textContent || '').trim();
     let bounds = el.getAttribute('bounds') || '';
     if (!bounds && el.getAttribute('x') !== null) {
       const x = parseFloat(el.getAttribute('x'));
@@ -21,6 +26,7 @@ export function parse(xml) {
       type: el.tagName,
       id,
       accId,
+      text,
       bounds,
       clickable
     });

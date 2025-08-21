@@ -25,7 +25,8 @@ export function renderTable(elements, tbody) {
   tbody.innerHTML = '';
   chunk(elements, el => {
     const tr = document.createElement('tr');
-    tr.innerHTML = `<td>${el.type}</td><td>${el.id}</td><td>${el.accId}</td><td>${el.bounds}</td>`;
+    const issues = el.issues || '';
+    tr.innerHTML = `<td>${el.type}</td><td>${el.id}</td><td>${el.accId}</td><td>${el.text}</td><td>${issues}</td>`;
     tbody.appendChild(tr);
   });
 }
