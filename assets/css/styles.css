@@ -44,10 +44,12 @@ section {
 
 .issue-warning {
   color: #ffb74d;
+  background: rgba(255, 183, 77, 0.1);
 }
 
 .issue-bad {
   color: #e57373;
+  background: rgba(229, 115, 115, 0.1);
 }
 
 button {

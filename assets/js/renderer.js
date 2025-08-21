@@ -9,24 +9,14 @@ export function renderSummary(summary, container) {
   `;
 }
 
-export function renderIssues(issues, container) {
-  const warnItems = issues.warnings.map(i => `<li class="issue-warning">${i.message}</li>`).join('');
-  const badItems = issues.bads.map(i => `<li class="issue-bad">${i.message}</li>`).join('');
-  container.innerHTML = `
-    <h2>Issues</h2>
-    <h3>Warnings</h3>
-    <ul>${warnItems || '<li>None</li>'}</ul>
-    <h3>Bad</h3>
-    <ul>${badItems || '<li>None</li>'}</ul>
-  `;
-}
-
 export function renderTable(elements, tbody) {
   tbody.innerHTML = '';
   chunk(elements, el => {
     const tr = document.createElement('tr');
-    const issues = el.issues || '';
-    tr.innerHTML = `<td>${el.type}</td><td>${el.id}</td><td>${el.accId}</td><td>${el.text}</td><td>${issues}</td>`;
+    const text = el.text || el.type;
+    const issueText = el.issues ? el.issues.join('; ') : '';
+    const issueClass = el.severity ? `issue-${el.severity}` : '';
+    tr.innerHTML = `<td>${text}</td><td>${el.id}</td><td>${el.accId}</td><td class="${issueClass}">${issueText}</td>`;
     tbody.appendChild(tr);
   });
 }

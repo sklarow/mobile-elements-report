@@ -9,10 +9,11 @@ function download(filename, content, type) {
 }
 
 export function exportCsv(elements) {
-  const header = 'type,id,accessibility_id,text,issues';
+  const header = 'text,id,accessibility_id,issue';
   const rows = elements.map(e => {
-    const text = (e.text || '').replace(/"/g, '""');
-    return `${e.type},${e.id},${e.accId},"${text}",${e.issues || ''}`;
+    const text = (e.text || e.type || '').replace(/"/g, '""');
+    const issue = e.issues ? e.issues.join('; ') : '';
+    return `"${text}",${e.id},${e.accId},"${issue}"`;
   });
   const csv = [header, ...rows].join('\n');
   download('report.csv', csv, 'text/csv');
