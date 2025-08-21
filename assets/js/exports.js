@@ -9,11 +9,12 @@ function download(filename, content, type) {
 }
 
 export function exportCsv(elements) {
-  const header = 'text,id,accessibility_id,type,issue';
+  const header = 'text,id,accessibility_id,type,issue,xpath';
   const rows = elements.map(e => {
     const text = (e.text || '').replace(/"/g, '""');
     const issue = e.issues ? e.issues.join('; ') : '';
-    return `"${text}",${e.id},${e.accId},${e.type},"${issue}"`;
+    const xpath = (e.xpath || '').replace(/"/g, '""');
+    return `"${text}",${e.id},${e.accId},${e.type},"${issue}","${xpath}"`;
   });
   const csv = [header, ...rows].join('\n');
   download('report.csv', csv, 'text/csv');

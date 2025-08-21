@@ -3,6 +3,19 @@ export function parse(xml) {
   const doc = parser.parseFromString(xml, 'text/xml');
   const elements = [];
 
+  function getXPath(node) {
+    const rid = node.getAttribute('resource-id');
+    if (rid) {
+      return `//${node.tagName}[@resource-id="${rid}"]`;
+    }
+    if (node === doc.documentElement) {
+      return `/${node.tagName}`;
+    }
+    const siblings = Array.from(node.parentElement.children).filter(n => n.tagName === node.tagName);
+    const index = siblings.indexOf(node) + 1;
+    return `${getXPath(node.parentElement)}/${node.tagName}[${index}]`;
+  }
+
   function traverse(node) {
     if (node.nodeType !== 1) return; // element nodes only
     const el = node;
@@ -22,13 +35,15 @@ export function parse(xml) {
       bounds = `[${x},${y}][${x + width},${y + height}]`;
     }
     const clickable = el.getAttribute('clickable') === 'true' || /Button/i.test(el.tagName);
+    const xpath = getXPath(el);
     elements.push({
       type: el.tagName,
       id,
       accId,
       text,
       bounds,
-      clickable
+      clickable,
+      xpath
     });
     Array.from(el.children).forEach(traverse);
   }

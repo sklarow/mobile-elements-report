@@ -16,7 +16,7 @@ export function renderTable(elements, tbody) {
     const text = el.text || '';
     const issueText = el.issues ? el.issues.join('; ') : '';
     const issueClass = el.severity ? `issue-${el.severity}` : '';
-    tr.innerHTML = `<td>${text}</td><td>${el.id}</td><td>${el.accId}</td><td>${el.type}</td><td class="${issueClass}">${issueText}</td>`;
+    tr.innerHTML = `<td>${text}</td><td>${el.id}</td><td>${el.accId}</td><td>${el.type}</td><td class="${issueClass}">${issueText}</td><td>${el.xpath}</td>`;
     tbody.appendChild(tr);
   });
 }
