@@ -1,0 +1,63 @@
+body {
+  background: #121212;
+  color: #e0e0e0;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+header, footer {
+  padding: 1rem;
+  background: #1f1f1f;
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+h1 {
+  flex: 1 0 100%;
+}
+
+main {
+  padding: 1rem;
+}
+
+section {
+  margin-bottom: 2rem;
+}
+
+#locatorTable {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+#locatorTable th, #locatorTable td {
+  border: 1px solid #333;
+  padding: 0.5rem;
+  text-align: left;
+}
+
+#locatorTable th {
+  background: #222;
+}
+
+.issue-warning {
+  color: #ffb74d;
+}
+
+.issue-bad {
+  color: #e57373;
+}
+
+button {
+  background: #333;
+  color: #e0e0e0;
+  border: none;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #444;
+}

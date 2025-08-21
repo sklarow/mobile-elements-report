@@ -1,0 +1,9 @@
+<hierarchy>
+  <android.widget.FrameLayout index="0" package="com.example" content-desc="root" bounds="[0,0][300,300]">
+    <android.widget.Button index="0" resource-id="btn1" content-desc="" bounds="[0,0][50,40]" clickable="true" />
+    <android.widget.Button index="1" resource-id="btnSubmit" content-desc="submit" bounds="[0,50][100,110]" clickable="true" />
+    <android.widget.TextView index="2" resource-id="" content-desc="" bounds="[0,120][100,150]" clickable="false" />
+    <android.widget.Button index="3" resource-id="btnSubmit" content-desc="submit duplicate" bounds="[0,160][100,200]" clickable="true" />
+    <android.widget.Button index="4" resource-id="" content-desc="noid" bounds="[0,210][200,250]" clickable="true" />
+  </android.widget.FrameLayout>
+</hierarchy>
