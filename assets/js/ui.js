@@ -1,6 +1,6 @@
 import { parse } from './parser.js';
 import { analyze } from './analyzer.js';
-import { renderSummary, renderIssues, renderTable } from './renderer.js';
+import { renderSummary, renderTable } from './renderer.js';
 import { exportCsv, exportJson, printReport } from './exports.js';
 
 export function setupUI() {
@@ -8,7 +8,6 @@ export function setupUI() {
   const androidBtn = document.getElementById('loadAndroidSample');
   const iosBtn = document.getElementById('loadIosSample');
   const summaryEl = document.getElementById('summary');
-  const issuesEl = document.getElementById('issues');
   const tableBody = document.querySelector('#locatorTable tbody');
 
   let lastResult = null;
@@ -18,7 +17,6 @@ export function setupUI() {
     const result = analyze(elements);
     lastResult = result;
     renderSummary(result.summary, summaryEl);
-    renderIssues(result.issues, issuesEl);
     renderTable(result.elements, tableBody);
   }
 

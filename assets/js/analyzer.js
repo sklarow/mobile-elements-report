@@ -11,26 +11,37 @@ export function analyze(elements) {
   const idMap = new Map();
   const accMap = new Map();
 
+  function addIssue(el, list, type, message) {
+    const entry = { type, message, element: el };
+    list.push(entry);
+    el.issues.push(message);
+    if (!el.severity || list === issues.bads) {
+      el.severity = list === issues.bads ? 'bad' : 'warning';
+    }
+  }
+
   elements.forEach(el => {
+    el.issues = [];
+    el.severity = null;
     if (!el.accId) {
-      issues.warnings.push({ type: 'missingAccId', message: 'Missing accessibility id', element: el });
+      addIssue(el, issues.warnings, 'missingAccId', 'Missing accessibility id');
     }
     if (el.clickable && !el.id) {
-      issues.warnings.push({ type: 'missingId', message: 'Interactive element missing id', element: el });
+      addIssue(el, issues.warnings, 'missingId', 'Interactive element missing id');
     }
     if (el.id && isGenericId(el.id)) {
-      issues.warnings.push({ type: 'genericId', message: `Generic id ${el.id}`, element: el });
+      addIssue(el, issues.warnings, 'genericId', `Generic id ${el.id}`);
     }
     if (el.id) {
       if (idMap.has(el.id)) {
-        issues.bads.push({ type: 'duplicateId', message: `Duplicate id ${el.id}`, element: el });
+        addIssue(el, issues.bads, 'duplicateId', `Duplicate id ${el.id}`);
       } else {
         idMap.set(el.id, true);
       }
     }
     if (el.accId) {
       if (accMap.has(el.accId)) {
-        issues.bads.push({ type: 'duplicateAccId', message: `Duplicate accessibility id ${el.accId}`, element: el });
+        addIssue(el, issues.bads, 'duplicateAccId', `Duplicate accessibility id ${el.accId}`);
       } else {
         accMap.set(el.accId, true);
       }
@@ -38,7 +49,7 @@ export function analyze(elements) {
     if (el.bounds) {
       const { width, height } = parseBounds(el.bounds);
       if (width < 48 || height < 48) {
-        issues.warnings.push({ type: 'smallTouch', message: `Small touch target ${width}x${height}`, element: el });
+        addIssue(el, issues.warnings, 'smallTouch', `Small touch target ${width}x${height}`);
       }
     }
   });
