@@ -13,10 +13,22 @@ export function renderTable(elements, tbody) {
   tbody.innerHTML = '';
   elements.forEach(el => {
     const tr = document.createElement('tr');
-    const text = el.text || '';
-    const issueText = el.issues ? el.issues.join('; ') : '';
-    const issueClass = el.severity ? `issue-${el.severity}` : '';
-    tr.innerHTML = `<td>${text}</td><td>${el.id}</td><td>${el.accId}</td><td>${el.type}</td><td class="${issueClass}">${issueText}</td><td>${el.xpath}</td>`;
+    const cells = [
+      el.text || '',
+      el.id,
+      el.accId,
+      el.type,
+      el.issues ? el.issues.join('; ') : ''
+    ];
+    cells.forEach((value, idx) => {
+      const td = document.createElement('td');
+      if (idx === 4 && el.severity) td.className = `issue-${el.severity}`;
+      td.textContent = value || '';
+      tr.appendChild(td);
+    });
+    const xpathTd = document.createElement('td');
+    xpathTd.textContent = el.xpath || '';
+    tr.appendChild(xpathTd);
     tbody.appendChild(tr);
   });
 }
