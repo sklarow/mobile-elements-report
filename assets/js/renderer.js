@@ -1,4 +1,4 @@
-import { chunk } from './utils.js';
+
 
 export function renderSummary(summary, container) {
   container.innerHTML = `
@@ -11,12 +11,12 @@ export function renderSummary(summary, container) {
 
 export function renderTable(elements, tbody) {
   tbody.innerHTML = '';
-  chunk(elements, el => {
+  elements.forEach(el => {
     const tr = document.createElement('tr');
-    const text = el.text || el.type;
+    const text = el.text || '';
     const issueText = el.issues ? el.issues.join('; ') : '';
     const issueClass = el.severity ? `issue-${el.severity}` : '';
-    tr.innerHTML = `<td>${text}</td><td>${el.id}</td><td>${el.accId}</td><td class="${issueClass}">${issueText}</td>`;
+    tr.innerHTML = `<td>${text}</td><td>${el.id}</td><td>${el.accId}</td><td>${el.type}</td><td class="${issueClass}">${issueText}</td>`;
     tbody.appendChild(tr);
   });
 }
